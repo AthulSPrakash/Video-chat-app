@@ -1,5 +1,4 @@
 import React, {useContext} from 'react';
-import {Button} from '@material-ui/core';
 import {SocketContext} from '../socketContext';
 
 const Notifications = () => {
@@ -7,11 +6,11 @@ const Notifications = () => {
     return(
       <>
         {call.isReceivingCall && !callAccepted && (
-          <div style={{display: 'flex', justifyContent: 'center'}}>
+          <div className="ntfn" style={{display: 'flex', justifyContent: 'center'}}>
             <h1>{call.name} is calling... </h1>
-            <Button variant="contained" color="primary" onClick={answerCall}>
-              Answer
-            </Button>
+            <button onClick={answerCall}>
+              <i className="fas fa-phone-alt"></i>
+            </button>
           </div>
         )}
       </>

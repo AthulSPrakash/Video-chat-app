@@ -1,10 +1,13 @@
 import React, {createContext, useState, useRef, useEffect} from 'react';
 import {io} from 'socket.io-client';
 import Peer from 'simple-peer';
+require('dotenv').config()
 
 const SocketContext = createContext();
 
-const socket = io('https://video-call-app-cloud.herokuapp.com/');
+const url = process.env.REACT_APP_URL || 'http://localhost:5000'
+
+const socket = io(url);
 
 const ContextProvider = ({children}) => {
     const [stream, setStream] = useState();

@@ -1,51 +1,89 @@
 import React, {useContext} from 'react';
-import {Grid, Typography, Paper} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
-
 import {SocketContext} from '../socketContext';
 
-const useStyles = makeStyles((theme) => ({
-  video: {
-    width: '550px',
-    [theme.breakpoints.down('xs')]: {
-      width: '100%'
-    },
-  },
-  gridContainer: {
-    justifyContent: 'center',
-    [theme.breakpoints.down('xs')]: {
-      flexDirection: 'column',
-    },
-  },
-  paper: {
-    padding: '10px',
-    margin: '10px',
-  },
-}));
-
 const VideoPlayer = () => {
-    const {name, callAccepted, myVideo, userVideo, callEnded, stream, call} = useContext(SocketContext);
-    const classes = useStyles();
+    const {callAccepted, myVideo, userVideo, callEnded, stream, call} = useContext(SocketContext);
+
+    //Mute Audio
+    const muteAudio = () => {
+      const btn = document.querySelector('.aud')
+      const muteIndtr = document.querySelector('.audio-indtr')
+      if(muteIndtr){
+        if(muteIndtr.innerHTML==="Audio is disabled"){
+          muteIndtr.innerHTML = ' '
+        }else{
+          muteIndtr.innerHTML = "Audio is disabled"
+        }
+      }
+      myVideo.current.srcObject.getAudioTracks()[0].enabled = !(myVideo.current.srcObject.getAudioTracks()[0].enabled)
+      btn.classList.toggle('fa-microphone-slash')
+    }
+
+    // const muteUserAudio = () => {
+    //   const btn = document.querySelector('.user-aud')
+    //   userVideo.current.srcObject.getAudioTracks()[0].enabled = !(userVideo.current.srcObject.getAudioTracks()[0].enabled)
+    //   btn.classList.toggle('fa-microphone-slash')
+    // }
+
+    //Disable Video
+    const disableVideo = () => {
+      const btn = document.querySelector('.vid')
+      const muteIndtr = document.querySelector('.mute-indtr')
+      if(muteIndtr){
+        if(muteIndtr.innerHTML==="Video is disabled"){
+          muteIndtr.innerHTML = ' '
+        }else{
+          muteIndtr.innerHTML = "Video is disabled"
+        }
+      }
+      myVideo.current.srcObject.getVideoTracks()[0].enabled = !(myVideo.current.srcObject.getVideoTracks()[0].enabled)
+      btn.classList.toggle('fa-video-slash')
+    }
+
+    // const disableUserVideo = () => {
+    //   const btn = document.querySelector('.user-vid')
+    //   userVideo.current.srcObject.getVideoTracks()[0].enabled = !(userVideo.current.srcObject.getVideoTracks()[0].enabled)
+    //   btn.classList.toggle('fa-video-slash')
+    // }
 
     return(
-      <Grid container className={classes.gridContainer}>
-        {stream && (
-          <Paper className={classes.paper}>
-            <Grid item xs={12} md={6}>
-              <Typography variant='h5' gutterBottom>{name || 'Name'}</Typography>
-              <video playsInline muted ref={myVideo} autoPlay className={classes.video}/>
-            </Grid>
-          </Paper>
-        )}
+      <div className="grid">
+        {stream && !callAccepted ? (
+          <div className="vid-container">
+            <h5>You</h5>
+            <video playsInline muted ref={myVideo} autoPlay/> 
+            <div className="btns">
+              <button onClick={()=>muteAudio()} className="mute audio-btn" title="Mute audio">
+                <i className="fas fa-microphone aud"></i>
+              </button>
+              <button  onClick={()=>disableVideo()} className="mute video-btn" title="Disable video">
+                <i className="fas fa-video vid"></i>
+              </button>
+            </div>
+          </div>
+        ) : 
+          <div className="vid-preview">
+            <h5>You</h5>
+            <video playsInline muted ref={myVideo} autoPlay/> 
+            <div className="audio-indtr"></div>
+            <div className="mute-indtr"></div>
+          </div> 
+        }
         {callAccepted && !callEnded && (
-          <Paper className={classes.paper}>
-            <Grid item xs={12} md={6}>
-              <Typography variant='h5' gutterBottom>{call.name || 'Name'}</Typography>
-              <video playsInline ref={userVideo} autoPlay className={classes.video}/>
-            </Grid>
-          </Paper>
+          <div className="vid-container">
+            <h5>{call.name || 'Name'}</h5>
+            <video playsInline ref={userVideo} autoPlay/>
+            <div className="btns">
+              <button onClick={()=>muteAudio()} className="mute audio-btn" title="Mute audio">
+                <i className="fas fa-microphone aud"></i>
+              </button>
+              <button  onClick={()=>disableVideo()} className="mute video-btn" title="Disable video">
+                <i className="fas fa-video vid"></i>
+              </button>
+            </div>
+          </div>
         )} 
-      </Grid>
+      </div>
     );
   };
   
