@@ -1,11 +1,4 @@
-<<<<<<< HEAD
 node_modules
 client/node_modules
 client/.env
 client/build
-=======
-client/.env
-client/build/
-client/node_modules/
-node_modules/
->>>>>>> alpha
