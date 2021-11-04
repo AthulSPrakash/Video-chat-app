@@ -1,5 +1,5 @@
 {
-  "name": "videocall-app",
+  "name": "video-chat-backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Athul S Prakash",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",

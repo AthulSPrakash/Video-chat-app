@@ -1,2 +1,2 @@
 # Video-chat-app
-simple one to one webrtc chat app
+One to one webRTC video chat app
