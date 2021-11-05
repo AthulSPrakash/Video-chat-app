@@ -5,7 +5,7 @@ require('dotenv').config()
 
 const SocketContext = createContext();
 
-const url = process.env.REACT_APP_URL || 'http://localhost:5000'
+const url = process.env.REACT_APP_B_URL || 'http://localhost:5000'
 
 const socket = io(url);
 
@@ -43,7 +43,7 @@ const ContextProvider = ({children}) => {
         const peer = new Peer({initiator: false, trickle: false, stream});
 
         peer.on('signal', (data) => {
-            socket.emit('answerCall', {signal: data, to: call.from});
+            socket.emit('answerCall', {signal: data, to: call.from, name});
         });
 
         peer.on('stream', (currentStream) => {

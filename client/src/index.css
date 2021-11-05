@@ -6,6 +6,7 @@
   --text-alt: rgb(15, 15, 15);
   --text-ter: grey;
   --call-accept: green;
+  --call-cancel: crimson;
 }
 
 /*-------------Global---------------*/
@@ -73,11 +74,11 @@ h5{
   display: flex;
   align-items: center;
   justify-content: center;
-  bottom: 50px;
+  bottom: 25px;
+  gap: 50px;
+  z-index: 2;
 }
 .mute{
-  position: absolute;
-  padding: 5px 0;
   background: none;
   font-size: 24px;
   border: none;
@@ -87,32 +88,28 @@ h5{
   align-items: center;
 }
 .audio-btn, .video-btn{
-  width: 55px;
-  height: 55px;
+  width: 65px;
+  height: 65px;
   border-radius: 55px;
   background: var(--btn-bg);
   backdrop-filter: blur(3px);
   border: 1px solid var(--btn-bg);
 }
-.audio-btn{
-  margin-right: 75px;
-}
-.video-btn{
-  margin-left: 75px;
-}
 
 /*------Call Settings---------*/
 .call{
+  width: 100%;
   position: absolute;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
   bottom: 25px;
-  left: 25px;
 }
 .call button{
   width: 55px;
   height: 55px;
-  font-size: 28px;
+  font-size: 24px;
   border-radius: 55px;
   background: var(--btn-bg);
   -webkit-backdrop-filter: blur(3px);
@@ -122,6 +119,7 @@ h5{
   display:  flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 }
 .option{
   position: absolute;
@@ -156,7 +154,7 @@ form div{
 }
 .end-call{
   padding: 6px 15px !important;
-  background: crimson !important;
+  background: var(--call-cancel) !important;
 }
 .MuiButton-label{
   color: var(--text);
@@ -216,34 +214,7 @@ form div{
   left: 13.5%;
   letter-spacing: 0.05em;
 }
-@media screen and (max-width:575px) {
-  .vid-preview{
-    width: 150px;
-    bottom: 80px;
-  }
-  .vid-preview h5{
-    font-size: 16px;
-  }
-  .audio-indtr{
-    font-size: 12px;
-    bottom: 50%;
-  }
-  .mute-indtr{
-    font-size: 12px;
-    bottom: 35%;
-  }
-}
-@media screen and (max-width:425px) {
-  .vid-preview{
-    width: 120px;
-  }
-  .vid-preview h5{
-    font-size: 12px;
-  }
-  .audio-indtr, .mute-indtr{
-    font-size: 10px;
-  }
-}
+
 /*---------Notification bar-------------*/
 .ntfn{
   position: absolute;
@@ -272,6 +243,98 @@ form div{
   color: var(--call-accept);
   font-size: 24px;
 }
+
+/*--------call shared link------*/
+.redir{
+  position: absolute;
+  width: 100%;
+  max-width: 300px;
+  background-color: var(--text);
+  padding: 25px;
+  z-index: 2;
+  top: 57%;
+  border-radius: 5px;
+}
+.redir input{
+  font-size: 16px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border:  2px solid var(--text-ter);
+  outline: none;
+}
+.redir input:focus, .redir input:active{
+  border: 2px solid var(--call-btn);
+}
+.redir-call, .redir-cancel{
+  margin: 7px auto;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--call-btn);
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: var(--text);
+  font-size: 18px;
+}
+.redir-cancel{
+  background-color: var(--call-cancel);
+  display: none;
+}
+.redir-box-cls{
+  position: absolute;
+  border: none;
+  background: none;
+  color: var(--call-cancel);
+  font-weight: 600;
+  font-size: 18px;
+  top: 3.5px;
+  right: 5px;
+}
+
+/*---------------responsive----------------*/
+@media screen and (max-width:575px) {
+  .vid-preview{
+    width: 150px;
+    bottom: 80px;
+  }
+  .vid-preview h5{
+    font-size: 16px;
+  }
+  .audio-indtr{
+    font-size: 12px;
+    bottom: 50%;
+  }
+  .mute-indtr{
+    font-size: 12px;
+    bottom: 35%;
+  }
+}
+@media screen and (max-width:425px) {
+  .vid-preview{
+    width: 120px;
+  }
+  .vid-preview h5{
+    font-size: 12px;
+  }
+  .audio-indtr, .mute-indtr{
+    font-size: 10px;
+  }
+}
+@media screen and (max-width:385px) {
+  .btns{
+    gap: 25px;
+  }
+  .audio-btn, .video-btn{
+    width: 55px;
+    height: 55px;
+    font-size: 22px;
+  }
+}
 @media screen and (max-width:375px) {
   .ntfn{
     padding: 10px;
@@ -280,12 +343,28 @@ form div{
     font-size: 24px;
   }
 }
+@media screen and (max-width:310px) {
+  .btns{
+    gap: 15px;
+  }
+  .audio-btn, .video-btn{
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
+  .call button{
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
+}
 @media screen and (max-width:290px) {
   .ntfn h1{
     font-size: 20px;
   }
-  .ntfn button, .mute, .call button{
+  .ntfn button, .mute{
     width: 45px;
     height: 45px;
+    font-size: 18px;
   }
 }

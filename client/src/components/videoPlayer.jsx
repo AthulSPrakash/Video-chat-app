@@ -19,11 +19,13 @@ const VideoPlayer = () => {
       btn.classList.toggle('fa-microphone-slash')
     }
 
+    //-----------------mute incoming audio--------------------------------------------------
     // const muteUserAudio = () => {
     //   const btn = document.querySelector('.user-aud')
     //   userVideo.current.srcObject.getAudioTracks()[0].enabled = !(userVideo.current.srcObject.getAudioTracks()[0].enabled)
     //   btn.classList.toggle('fa-microphone-slash')
     // }
+    //-----------------------------------------------------------------------------------
 
     //Disable Video
     const disableVideo = () => {
@@ -40,11 +42,39 @@ const VideoPlayer = () => {
       btn.classList.toggle('fa-video-slash')
     }
 
+    //--------------mute incoming video----------------------------------------------------
     // const disableUserVideo = () => {
     //   const btn = document.querySelector('.user-vid')
     //   userVideo.current.srcObject.getVideoTracks()[0].enabled = !(userVideo.current.srcObject.getVideoTracks()[0].enabled)
     //   btn.classList.toggle('fa-video-slash')
     // }
+    //-------------------------------------------------------------------------------------
+
+    //--------camera flip--------------------------------------------------------------
+    // const supports = navigator.mediaDevices.getSupportedConstraints();
+    // if (!supports['facingMode']) {
+    //   alert('This browser does not support facingMode! Hence Camera flip maynot work');
+    // }
+
+    // const options = {
+    //   audio: false,
+    //   video: {
+    //       facingMode: 'user', // Or 'environment'
+    //   },
+    // };
+
+    // // Stop the tracks
+    // const tracks = stream.getTracks();
+    // tracks.forEach(track => track.stop());
+
+    // // Provide new options
+    // stream = await navigator.mediaDevices.getUserMedia(options);
+
+    // // Add this stream to the video object
+    // videoElm.srcObject = null;
+    // videoElm.srcObject = stream;
+    // videoElm.play();
+  //--------------------------------------------------------------------------------------
 
     return(
       <div className="grid">
