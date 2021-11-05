@@ -32,10 +32,16 @@ const App = () => {
       document.querySelector('#calling').innerHTML = 'Calling...'
       const redirPhone = document.querySelector('.fa-phone')
       document.querySelector('#redir-input').style.display = 'none'
+      document.querySelector('.redir-box-cls').style.display = 'none' 
       document.querySelector('.redir-cancel').style.display = 'unset'
       if(redirPhone){
         redirPhone.classList.replace('fa-phone','fa-phone-volume')
       }
+    }
+
+    const cancelCall = () => {
+      leaveCall()
+      closeBox()
     }
 
     const closeBox = () => {
@@ -51,7 +57,7 @@ const App = () => {
             <i className="fas fa-phone"></i>
             <span id="calling">Call</span>
           </button>
-          <button title="cancel call" className="redir-cancel" onClick={leaveCall}>
+          <button title="cancel call" className="redir-cancel" onClick={()=>cancelCall()}>
             <i className="fas fa-phone-slash"></i>
             <span id="cancel">Cancel</span>
           </button>
