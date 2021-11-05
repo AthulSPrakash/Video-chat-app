@@ -300,7 +300,7 @@ form div{
 @media screen and (max-width:575px) {
   .vid-preview{
     width: 150px;
-    bottom: 80px;
+    bottom: 95px;
   }
   .vid-preview h5{
     font-size: 16px;
