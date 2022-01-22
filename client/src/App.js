@@ -45,7 +45,7 @@ const App = () => {
     }
 
     const closeBox = () => {
-      window.open( process.env.REACT_APP_F_URL || 'http://localhost:3000', '_self' )
+      window.location.href = '/'
     }
 
     return (
